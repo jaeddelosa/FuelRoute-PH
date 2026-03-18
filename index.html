@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script src="/.nekoweb-api/static/site.js" defer></script>
+<head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FuelRoute PH — Distance & Fuel Calculator</title>
+  <title>FuelRoute PH — Distance &amp; Fuel Calculator</title>
   <link rel="icon" href="fuelroute-ph logo.png" type="image/x-icon">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,7 +30,7 @@
     .logo-text{font-family:var(--font-display);font-size:20px;font-weight:800;letter-spacing:-0.3px}
     .logo-text .t{color:var(--accent)}
 
-    /* Fuel price badge — enhanced for live data */
+    /* Fuel price badge */
     .fuel-badge{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:12px;color:var(--text-secondary);transition:border-color 0.3s,background 0.3s;cursor:default}
     .fuel-badge.live{border-color:rgba(61,214,200,0.4);background:rgba(61,214,200,0.06)}
     .fuel-badge.fetching{border-color:rgba(251,191,36,0.4);background:rgba(251,191,36,0.05)}
@@ -45,7 +45,8 @@
     /* User pill */
     .user-pill{display:flex;align-items:center;gap:8px;background:var(--bg-card);border:1px solid var(--border);border-radius:999px;padding:6px 14px;font-size:12px;color:var(--text-secondary);cursor:pointer;transition:border-color var(--transition),color var(--transition)}
     .user-pill:hover{border-color:var(--red);color:var(--red)}
-    .user-pill .avatar{width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0d1117;flex-shrink:0}
+    .user-pill .avatar{width:22px;height:22px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0d1117;flex-shrink:0;overflow:hidden}
+    .user-pill .avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 
     /* Layout */
     .main-content{display:grid;grid-template-columns:395px 1fr;height:calc(100vh - 65px)}
@@ -130,11 +131,9 @@
     .info-box.warn{background:rgba(249,115,22,0.07);border:1px solid rgba(249,115,22,0.25);color:var(--orange)}
     .tag{display:inline-block;background:rgba(61,214,200,0.12);color:var(--accent);border-radius:4px;padding:1px 6px;font-size:10px;font-weight:600;letter-spacing:0.5px}
 
-    /* Results empty */
+    /* Results */
     .results-empty{text-align:center;padding:20px 10px;color:var(--text-muted);font-size:13px}
     .results-empty .icon{font-size:32px;margin-bottom:8px;opacity:0.5}
-
-    /* Fetching state */
     .fetching-row{text-align:center;padding:18px 0;color:var(--text-secondary);font-size:13px;display:flex;align-items:center;justify-content:center;gap:10px}
     .mini-spinner{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;flex-shrink:0}
 
@@ -163,8 +162,6 @@
     .route-stat-value.green{color:var(--green)}
     .route-stat-value.accent{color:var(--accent)}
     .route-stat-unit{font-size:10px;color:var(--text-secondary)}
-
-    /* Saving banner */
     .saving-banner{border-radius:var(--radius-sm);padding:10px 13px;background:rgba(74,222,128,0.08);border:1px solid rgba(74,222,128,0.25);font-size:12px;color:var(--green);line-height:1.6;margin-top:10px}
 
     /* Map */
@@ -193,7 +190,7 @@
     .leaflet-control-zoom a{background:rgba(21,24,32,0.92)!important;color:var(--text-primary)!important;border-color:var(--border)!important}
     .leaflet-control-zoom a:hover{background:var(--bg-card)!important;color:var(--accent)!important}
 
-    /* ── Place Search ───────────────────────────────────────────── */
+    /* Place Search */
     .place-search-wrap{position:relative;margin-bottom:10px}
     .place-search-input{width:100%;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-sm);color:var(--text-primary);font-family:var(--font-body);font-size:13px;padding:9px 36px 9px 12px;outline:none;transition:border-color var(--transition),box-shadow var(--transition)}
     .place-search-input:focus{border-color:var(--border-focus);box-shadow:0 0 0 3px var(--accent-glow)}
@@ -217,8 +214,7 @@
     .search-or-divider{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-muted);margin:8px 0}
     .search-or-divider::before,.search-or-divider::after{content:'';flex:1;height:1px;background:var(--border)}
 
-
-    /* ── News Feed Panel (bottom of map) ───────────────────────── */
+    /* News Feed */
     .news-panel{position:absolute;bottom:0;left:0;right:0;z-index:500;display:flex;flex-direction:column;transition:transform 0.32s cubic-bezier(0.4,0,0.2,1)}
     .news-panel.collapsed{transform:translateY(calc(100% - 38px))}
     .news-tab{height:38px;background:rgba(21,24,32,0.97);border-top:1px solid var(--border);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 16px;cursor:pointer;user-select:none;backdrop-filter:blur(8px);flex-shrink:0;transition:background var(--transition)}
@@ -273,6 +269,18 @@
     .auth-btn:hover{background:#5ee8db;box-shadow:0 0 24px var(--accent-glow);transform:translateY(-1px)}
     .auth-btn:active{transform:translateY(0)}
     .auth-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+    /* ── Google Sign-In Button ── */
+    .auth-btn-google{width:100%;background:var(--bg-input);color:var(--text-primary);border:1px solid var(--border);border-radius:var(--radius-sm);font-family:var(--font-body);font-size:14px;font-weight:600;padding:11px;cursor:pointer;transition:all var(--transition);display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:6px}
+    .auth-btn-google:hover{border-color:#4285f4;background:rgba(66,133,244,0.08);box-shadow:0 0 16px rgba(66,133,244,0.15);transform:translateY(-1px)}
+    .auth-btn-google:active{transform:translateY(0)}
+    .auth-btn-google:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+    .google-icon{width:18px;height:18px;flex-shrink:0}
+
+    /* ── Auth divider ── */
+    .auth-divider{display:flex;align-items:center;gap:10px;margin:16px 0;font-size:12px;color:var(--text-muted)}
+    .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
     .auth-switch{text-align:center;font-size:13px;color:var(--text-secondary);margin-top:18px}
     .auth-switch a{color:var(--accent);text-decoration:none;font-weight:600;cursor:pointer}
     .auth-switch a:hover{text-decoration:underline}
@@ -310,6 +318,21 @@
       <div class="auth-subtitle">Sign in to continue to FuelRoute PH</div>
       <div class="auth-error" id="signin-error"></div>
       <div class="auth-success" id="signin-success"></div>
+
+      <!-- Google Sign-In -->
+      <button class="auth-btn-google" id="signin-google-btn" onclick="doGoogleSignIn()">
+        <svg class="google-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          <path fill="none" d="M0 0h48v48H0z"/>
+        </svg>
+        <span id="signin-google-text">Continue with Google</span>
+      </button>
+
+      <div class="auth-divider">or sign in with email</div>
+
       <div class="auth-input-group">
         <label for="signin-email">Email address</label>
         <input type="email" id="signin-email" class="auth-input" placeholder="you@example.com" autocomplete="email" />
@@ -332,6 +355,21 @@
       <div class="auth-subtitle">Join FuelRoute PH — it's free</div>
       <div class="auth-error" id="signup-error"></div>
       <div class="auth-success" id="signup-success"></div>
+
+      <!-- Google Sign-Up -->
+      <button class="auth-btn-google" id="signup-google-btn" onclick="doGoogleSignIn()">
+        <svg class="google-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+          <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+          <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+          <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          <path fill="none" d="M0 0h48v48H0z"/>
+        </svg>
+        <span id="signup-google-text">Sign up with Google</span>
+      </button>
+
+      <div class="auth-divider">or create account with email</div>
+
       <div class="auth-input-group">
         <label for="signup-name">Display name</label>
         <input type="text" id="signup-name" class="auth-input" placeholder="Your name" autocomplete="name" />
@@ -365,7 +403,6 @@
       </div>
     </div>
     <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-      <!-- Live fuel badge in header -->
       <div class="fuel-badge fetching" id="header-fuel-badge">
         <div class="fuel-badge-spinner" id="badge-spinner"></div>
         <span id="fuel-badge-text">Fetching live prices…</span>
@@ -409,8 +446,6 @@
       <!-- STEP 2: DESTINATION -->
       <div class="card">
         <div class="card-title">② Target Destination</div>
-
-        <!-- Place name search -->
         <div class="form-group">
           <label>Search by place name</label>
           <div class="place-search-wrap">
@@ -428,10 +463,7 @@
             <div class="place-suggestions" id="place-suggestions"></div>
           </div>
         </div>
-
         <div class="search-or-divider">or click on the map</div>
-
-        <!-- Current destination display -->
         <div class="form-group" style="margin-bottom:0">
           <div class="loc-row">
             <div class="loc-dot" id="target-dot"></div>
@@ -508,7 +540,7 @@
                  placeholder="e.g. 15.5" oninput="onInputChange()" />
         </div>
 
-        <!-- ── LIVE FUEL PRICE SECTION ─────────────────────────────── -->
+        <!-- LIVE FUEL PRICE -->
         <div class="form-group">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">
             <label style="margin-bottom:0">Fuel Price (₱/L)</label>
@@ -518,7 +550,6 @@
             </button>
           </div>
 
-          <!-- Live price display box -->
           <div class="live-price-box loading" id="live-price-box">
             <div class="live-price-header">
               <span class="live-price-label loading" id="live-price-label">🔄 Fetching live prices…</span>
@@ -565,17 +596,14 @@
       <!-- STEP 4: ROUTE COMPARISON -->
       <div class="card">
         <div class="card-title">④ Route Comparison</div>
-
         <div id="results-empty" class="results-empty">
           <div class="icon">🗺️</div>
           Set your location and click a destination on the map to compare routes &amp; fuel costs.
         </div>
-
         <div id="results-loading" class="fetching-row" style="display:none">
           <div class="mini-spinner"></div>
           Fetching road routes from OpenStreetMap…
         </div>
-
         <div id="route-cards-wrap" class="route-cards-wrap" style="display:none"></div>
         <div id="saving-banner" class="saving-banner" style="display:none"></div>
         <div id="results-error" style="display:none;font-size:12px;color:var(--orange);padding:10px 0;text-align:center;line-height:1.7"></div>
@@ -605,7 +633,7 @@
         <p id="loading-msg">Detecting your location…</p>
       </div>
 
-      <!-- ── News Feed Panel ──────────────────────────────────── -->
+      <!-- News Feed Panel -->
       <div class="news-panel collapsed" id="news-panel">
         <div class="news-tab" id="news-tab" onclick="toggleNewsPanel()">
           <div class="news-tab-left">
@@ -652,6 +680,13 @@ firebase.initializeApp(firebaseConfig);
 const auth      = firebase.auth();
 const analytics = firebase.analytics();
 
+/* ─── Google Auth Provider ───────────────────────────────────────── */
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.addScope('profile');
+googleProvider.addScope('email');
+// Always prompt account picker so users can choose their Google account
+googleProvider.setCustomParameters({ prompt: 'select_account' });
+
 /* ─── Auth UI helpers ────────────────────────────────────────────── */
 function showPanel(panel) {
   document.getElementById('panel-signin').style.display = panel === 'signin' ? 'block' : 'none';
@@ -673,6 +708,12 @@ function setBtnLoading(btnId, textId, loading, defaultText) {
   if (loading) span.innerHTML='<span style="width:16px;height:16px;border:2px solid rgba(13,15,20,0.3);border-top-color:#0d1117;border-radius:50%;animation:spin 0.7s linear infinite;display:inline-block;vertical-align:middle"></span>';
   else span.textContent=defaultText;
 }
+function setGoogleBtnLoading(btnId, textId, loading, defaultText) {
+  const btn  = document.getElementById(btnId);
+  const span = document.getElementById(textId);
+  btn.disabled = loading;
+  span.textContent = loading ? 'Connecting…' : defaultText;
+}
 function friendlyAuthError(code) {
   const map={
     'auth/email-already-in-use':'This email is already registered. Try signing in instead.',
@@ -684,10 +725,37 @@ function friendlyAuthError(code) {
     'auth/too-many-requests':'Too many failed attempts. Please wait a moment and try again.',
     'auth/network-request-failed':'Network error. Check your internet connection.',
     'auth/user-disabled':'This account has been disabled.',
-    'auth/operation-not-allowed':'Email/password sign-in is not enabled. Contact support.',
+    'auth/operation-not-allowed':'Google sign-in is not enabled. Enable it in Firebase Console → Authentication → Sign-in method.',
+    'auth/popup-closed-by-user':'Sign-in popup was closed. Please try again.',
+    'auth/popup-blocked':'Popup blocked — please allow popups for this site and try again.',
+    'auth/cancelled-popup-request':'Sign-in was cancelled. Please try again.',
+    'auth/unauthorized-domain':'This domain is not authorized. Add it in Firebase Console → Authentication → Settings → Authorized domains.',
+    'auth/account-exists-with-different-credential':'An account already exists with this email using a different sign-in method.',
   };
-  return map[code]||'An error occurred. Please try again.';
+  return map[code] || `Error: ${code}`;
 }
+
+/* ─── Google Sign-In ─────────────────────────────────────────────── */
+async function doGoogleSignIn() {
+  clearAuthMessages();
+  const isSignup    = document.getElementById('panel-signup').style.display !== 'none';
+  const errorId     = isSignup ? 'signup-error'       : 'signin-error';
+  const btnId       = isSignup ? 'signup-google-btn'  : 'signin-google-btn';
+  const textId      = isSignup ? 'signup-google-text' : 'signin-google-text';
+  const defaultText = isSignup ? 'Sign up with Google' : 'Continue with Google';
+
+  setGoogleBtnLoading(btnId, textId, true, defaultText);
+  try {
+    await auth.signInWithPopup(googleProvider);
+  } catch(err) {
+    console.error('Google sign-in error:', err.code, err.message);
+    setGoogleBtnLoading(btnId, textId, false, defaultText);
+    if (err.code !== 'auth/popup-closed-by-user' && err.code !== 'auth/cancelled-popup-request') {
+      setAuthError(errorId, friendlyAuthError(err.code));
+    }
+  }
+}
+
 async function doSignUp() {
   clearAuthMessages();
   const name=document.getElementById('signup-name').value.trim();
@@ -740,18 +808,27 @@ auth.onAuthStateChanged(user => {
   if (user) {
     document.getElementById('auth-overlay').classList.add('hidden');
     document.getElementById('app-wrapper').style.display='grid';
-    const displayName=user.displayName||user.email.split('@')[0];
-    document.getElementById('user-display-name').textContent=displayName;
-    document.getElementById('user-avatar').textContent=displayName.charAt(0).toUpperCase();
+    const displayName = user.displayName || user.email.split('@')[0];
+    document.getElementById('user-display-name').textContent = displayName;
+
+    // Show Google profile photo if available, otherwise show initial letter
+    const avatarEl = document.getElementById('user-avatar');
+    if (user.photoURL) {
+      avatarEl.innerHTML = `<img src="${user.photoURL}" alt="${displayName}" referrerpolicy="no-referrer">`;
+    } else {
+      avatarEl.textContent = displayName.charAt(0).toUpperCase();
+    }
+
     if (!mapInitialized) { mapInitialized=true; initMap(); }
-    // Fetch live prices + news once per session
-    if (!priceFetched) { priceFetched=true; fetchLivePrices(); fetchFuelNews(false); }
+    if (!priceFetched)   { priceFetched=true; fetchLivePrices(); fetchFuelNews(false); }
   } else {
     document.getElementById('app-wrapper').style.display='none';
     document.getElementById('auth-overlay').classList.remove('hidden');
     showPanel('signin');
     setBtnLoading('signin-btn','signin-btn-text',false,'Sign In');
     setBtnLoading('signup-btn','signup-btn-text',false,'Create Account');
+    setGoogleBtnLoading('signin-google-btn','signin-google-text',false,'Continue with Google');
+    setGoogleBtnLoading('signup-google-btn','signup-google-text',false,'Sign up with Google');
     priceFetched=false;
   }
 });
@@ -765,12 +842,9 @@ auth.onAuthStateChanged(user => {
  * ═══════════════════════════════════════════════════════════════════ */
 
 const FUEL_CACHE_KEY = 'fuelroute_ph_prices_v2';
-const FUEL_CACHE_TTL = 4 * 60 * 60 * 1000; // 4 hours
-
-/* Fallback prices (used if API call fails) */
+const FUEL_CACHE_TTL = 4 * 60 * 60 * 1000;
 const FALLBACK_PRICES = { ron91: 68, ron95: 72, diesel: 63 };
 
-/* ── Read from sessionStorage cache ─────────────────────────── */
 function loadCachedPrices() {
   try {
     const raw = sessionStorage.getItem(FUEL_CACHE_KEY);
@@ -784,7 +858,6 @@ function savePriceCache(data) {
   try { sessionStorage.setItem(FUEL_CACHE_KEY, JSON.stringify({ ...data, ts: Date.now() })); } catch {}
 }
 
-/* ── Update badge in header ──────────────────────────────────── */
 function updateHeaderBadge(state, ron95, dateStr) {
   const badge   = document.getElementById('header-fuel-badge');
   const text    = document.getElementById('fuel-badge-text');
@@ -803,14 +876,12 @@ function updateHeaderBadge(state, ron95, dateStr) {
     badge.insertBefore(pulse, badge.firstChild);
     text.innerHTML = `RON 95 &nbsp;<strong style="color:var(--text-primary)">₱${ron95}/L</strong>&nbsp;· ${dateStr} <span style="color:var(--green);font-size:10px">● LIVE</span>`;
   } else {
-    // No alarming error color — just quietly indicate manual entry is needed
     badge.classList.add('fetching');
     spinner.style.display = 'none';
     text.innerHTML = `Fuel price &nbsp;<strong style="color:var(--text-primary)">— enter manually</strong>`;
   }
 }
 
-/* ── Main fetch function ─────────────────────────────────────── */
 async function fetchLivePrices() {
   const refreshBtn = document.getElementById('btn-refresh-price');
   const priceBox   = document.getElementById('live-price-box');
@@ -818,14 +889,12 @@ async function fetchLivePrices() {
   const skeleton   = document.getElementById('live-price-skeleton');
   const gridWrap   = document.getElementById('live-price-grid-wrap');
 
-  // Check cache first
   const cached = loadCachedPrices();
   if (cached && !refreshBtn.classList.contains('force')) {
     renderPriceData(cached);
     return;
   }
 
-  // Set loading state
   if (refreshBtn) { refreshBtn.disabled=true; refreshBtn.classList.add('spinning'); }
   priceBox.className = 'live-price-box loading';
   label.className    = 'live-price-label loading';
@@ -863,11 +932,9 @@ Use the actual latest prices you find. If prices are a range, use min and max. I
     if (!response.ok) throw new Error(`API ${response.status}`);
     const data = await response.json();
 
-    // Extract final text block from content
     let jsonStr = null;
     for (const block of (data.content || [])) {
       if (block.type === 'text' && block.text) {
-        // Try to find JSON in the text
         const match = block.text.match(/\{[\s\S]*"ron91"[\s\S]*"ron95"[\s\S]*"diesel"[\s\S]*\}/);
         if (match) { jsonStr = match[0]; break; }
       }
@@ -875,11 +942,8 @@ Use the actual latest prices you find. If prices are a range, use min and max. I
 
     if (!jsonStr) throw new Error('No JSON in response');
     const prices = JSON.parse(jsonStr);
-
-    // Validate structure
     if (!prices.ron91 || !prices.ron95 || !prices.diesel) throw new Error('Invalid price structure');
 
-    // Normalize: ensure min/max exist
     ['ron91','ron95','diesel'].forEach(k => {
       if (typeof prices[k] === 'number') prices[k] = { min: prices[k], max: prices[k] };
       prices[k].min = parseFloat(prices[k].min) || FALLBACK_PRICES[k];
@@ -891,15 +955,12 @@ Use the actual latest prices you find. If prices are a range, use min and max. I
 
   } catch (err) {
     console.warn('Live price fetch failed:', err);
-    // Don't show any numbers — just ask user to enter their local price
     priceBox.className = 'live-price-box error';
     label.className    = 'live-price-label error';
     label.textContent  = '';
     skeleton.style.display = 'none';
-    // Hide the price grid entirely — no misleading numbers
     gridWrap.style.display = 'none';
     document.getElementById('live-price-manual-hint').style.display = 'block';
-    // Clear the fuel price input so the user is prompted to fill it in themselves
     const fuelInp = document.getElementById('fuel-price');
     fuelInp.value = '';
     fuelInp.placeholder = 'Enter your local pump price';
@@ -910,7 +971,6 @@ Use the actual latest prices you find. If prices are a range, use min and max. I
   }
 }
 
-/* ── Render parsed price data to UI ──────────────────────────── */
 function renderPriceData(prices) {
   const priceBox = document.getElementById('live-price-box');
   const label    = document.getElementById('live-price-label');
@@ -936,7 +996,6 @@ function renderPriceData(prices) {
   document.getElementById('price-ron95').textContent  = fmtRange(prices.ron95);
   document.getElementById('price-diesel').textContent = fmtRange(prices.diesel);
 
-  // Format date nicely
   let dateLabel = prices.date || 'Latest';
   try {
     const d = new Date(prices.date);
@@ -949,23 +1008,17 @@ function renderPriceData(prices) {
   label.textContent = `✓ Live prices · ${dateLabel}`;
   sourceEl.innerHTML = `Source: ${prices.source||'DOE Philippines'} &nbsp;·&nbsp; ${freshStr}${prices.note ? ' &nbsp;· '+prices.note:''}`;
 
-  // Auto-fill the RON 95 average into the price input
   const ron95mid = prices.ron95
     ? ((parseFloat(prices.ron95.min)+parseFloat(prices.ron95.max))/2).toFixed(1)
     : FALLBACK_PRICES.ron95;
-  const currentInput = parseFloat(document.getElementById('fuel-price').value);
-  // Only auto-update if user hasn't manually changed it from the previous auto-fill
-  // (detect if it's close to our fallback or a previous auto-fill)
   if (!document.getElementById('fuel-price').dataset.manuallyEdited) {
     document.getElementById('fuel-price').value = ron95mid;
     if (cachedRoutes.length > 0) renderRouteCards(cachedRoutes);
   }
 
-  // Update header badge
   updateHeaderBadge('live', fmtRange(prices.ron95), dateLabel);
 }
 
-/* Mark fuel price input as manually edited after user changes it */
 document.addEventListener('DOMContentLoaded', () => {
   const inp = document.getElementById('fuel-price');
   if (inp) inp.addEventListener('input', () => { inp.dataset.manuallyEdited = '1'; });
@@ -973,7 +1026,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ═══════════════════════════════════════════════════════════════════
- * PLACE NAME SEARCH (Nominatim geocoding — OSM, no key needed)
+ * PLACE NAME SEARCH
  * ═══════════════════════════════════════════════════════════════════ */
 
   let placeSearchTimer   = null;
@@ -981,7 +1034,6 @@ document.addEventListener('DOMContentLoaded', () => {
   let placeSuggestions   = [];
 
   function onPlaceSearchInput(val) {
-    const inp = document.getElementById('place-search-input');
     const clr = document.getElementById('place-clear-btn');
     clr.style.display = val.trim() ? 'block' : 'none';
     closePlaceSuggestions();
@@ -997,7 +1049,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   async function searchPlaces(query) {
     try {
-      // Bias results to Philippines bounding box
       const url = `https://nominatim.openstreetmap.org/search?` +
         `q=${encodeURIComponent(query)}&format=json&limit=6&addressdetails=1` +
         `&countrycodes=ph&accept-language=en` +
@@ -1080,16 +1131,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!r) return;
     const lat = parseFloat(r.lat), lng = parseFloat(r.lon);
     const name = r.namedetails?.name || r.name || r.display_name.split(',')[0];
-
-    // Fill input with chosen name
     const inp = document.getElementById('place-search-input');
     inp.value = name;
     inp.classList.remove('searching');
     inp.classList.add('found');
     document.getElementById('place-clear-btn').style.display = 'block';
     closePlaceSuggestions();
-
-    // Apply as destination
     applyDestination(lat, lng, name);
   }
 
@@ -1130,7 +1177,6 @@ document.addEventListener('DOMContentLoaded', () => {
     inp.focus();
   }
 
-  // Close suggestions when clicking outside
   document.addEventListener('click', e => {
     if (!e.target.closest('.place-search-wrap')) closePlaceSuggestions();
   });
@@ -1177,12 +1223,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('lbtn-str').classList.toggle('active',type==='str');
   }
 
-  /* Markers */
   const gpsIcon = L.divIcon({className:'',html:`<div style="position:relative;width:30px;height:30px;transform:translate(-50%,-50%)"><div style="position:absolute;inset:0;border-radius:50%;background:rgba(61,214,200,0.25);animation:rpl 2s ease-out infinite"></div><div style="position:absolute;inset:7px;border-radius:50%;background:#3dd6c8;border:2px solid #fff;box-shadow:0 2px 8px rgba(61,214,200,0.7)"></div></div><style>@keyframes rpl{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.8);opacity:0}}</style>`,iconSize:[0,0],iconAnchor:[0,0]});
   const manualIcon = L.divIcon({className:'',html:`<div style="position:relative;width:30px;height:30px;transform:translate(-50%,-50%)"><div style="position:absolute;inset:0;border-radius:50%;background:rgba(251,191,36,0.25);animation:rplY 2s ease-out infinite"></div><div style="position:absolute;inset:7px;border-radius:50%;background:#fbbf24;border:2px solid #fff;box-shadow:0 2px 8px rgba(251,191,36,0.8)"></div></div><style>@keyframes rplY{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.8);opacity:0}}</style>`,iconSize:[0,0],iconAnchor:[0,0]});
   const destIcon = L.divIcon({className:'',html:`<div style="width:28px;height:38px;transform:translate(-50%,-100%)"><svg viewBox="0 0 28 38" xmlns="http://www.w3.org/2000/svg"><path d="M14 0C6.27 0 0 6.27 0 14c0 9.6 14 24 14 24S28 23.6 28 14C28 6.27 21.73 0 14 0z" fill="#f97316"/><circle cx="14" cy="14" r="6.5" fill="#fff"/><circle cx="14" cy="14" r="3.5" fill="#f97316"/></svg></div>`,iconSize:[0,0],iconAnchor:[0,0]});
 
-  /* Pin Mode */
   function togglePinMode() {
     pinModeActive=!pinModeActive;
     const btn=document.getElementById('btn-pin'),bnr=document.getElementById('manual-banner'),hint=document.getElementById('map-hint'),row=document.getElementById('origin-row'),ma=document.getElementById('map-area');
@@ -1214,7 +1258,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetAndCalculate();
   }
 
-  /* GPS */
   function detectLocation() {
     if (pinModeActive) deactivatePinMode();
     if (!navigator.geolocation) { alert('Geolocation not supported. Use "Set on Map" instead.'); return; }
@@ -1236,7 +1279,6 @@ document.addEventListener('DOMContentLoaded', () => {
     resetAndCalculate();
   }
 
-  /* Destination */
   function applyDestination(lat,lng,placeName) {
     targetLatLng={lat,lng};
     const popupLabel = placeName ? `<b>🎯 ${placeName}</b>` : '<b>🎯 Destination</b>';
@@ -1247,12 +1289,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('target-text').innerHTML=`<span style="font-weight:600">${escHtmlSafe(placeName)}</span><br><span style="color:var(--text-muted);font-size:10px">${lat.toFixed(5)}°N, ${lng.toFixed(5)}°E</span>`;
     } else {
       document.getElementById('target-text').textContent=`${lat.toFixed(5)}°N, ${lng.toFixed(5)}°E`;
-      // Clear the search input if destination was set by map click
       const inp = document.getElementById('place-search-input');
       if (inp) { inp.value='';inp.classList.remove('found','searching');document.getElementById('place-clear-btn').style.display='none'; }
     }
     document.getElementById('btn-clear').style.display='block';
-    // Fly to the destination on search
     if (placeName && map) map.flyTo([lat,lng],15,{duration:1.2});
     resetAndCalculate();
   }
@@ -1263,14 +1303,12 @@ document.addEventListener('DOMContentLoaded', () => {
     targetLatLng=null;cachedRoutes=[];
     document.getElementById('target-dot').className='loc-dot';
     document.getElementById('target-text').textContent='No destination set yet';
-    // Reset place search
     const inp = document.getElementById('place-search-input');
     if (inp) { inp.value='';inp.classList.remove('found','searching');document.getElementById('place-clear-btn').style.display='none';closePlaceSuggestions(); }
     document.getElementById('btn-clear').style.display='none';
     showState('empty');
   }
 
-  /* Polylines */
   function clearPolylines() { routePolylines.forEach(p=>{if(p)map.removeLayer(p)});routePolylines=[]; }
   function drawRoutes(routes,selectedIdx) {
     clearPolylines();
@@ -1298,7 +1336,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (card) card.scrollIntoView({behavior:'smooth',block:'nearest'});
   }
 
-  /* OSRM */
   async function fetchRoutes(o,t) {
     const url=`https://router.project-osrm.org/route/v1/driving/${o.lng},${o.lat};${t.lng},${t.lat}?overview=full&geometries=geojson&alternatives=3&steps=false`;
     const res=await fetch(url);
@@ -1308,14 +1345,12 @@ document.addEventListener('DOMContentLoaded', () => {
     return data.routes;
   }
 
-  /* Haversine */
   function haversine(lat1,lng1,lat2,lng2) {
     const R=6371,r=d=>d*Math.PI/180;
     const a=Math.sin(r(lat2-lat1)/2)**2+Math.cos(r(lat1))*Math.cos(r(lat2))*Math.sin(r(lng2-lng1)/2)**2;
     return R*2*Math.atan2(Math.sqrt(a),Math.sqrt(1-a));
   }
 
-  /* Vehicle / Input helpers */
   function onVehicleChange() {
     document.getElementById('custom-group').style.display=document.getElementById('vehicle-select').value==='custom'?'block':'none';
     if (document.getElementById('vehicle-select').value==='custom') document.getElementById('custom-eff').focus();
@@ -1326,19 +1361,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (sel.value==='custom') { const v=parseFloat(document.getElementById('custom-eff').value);return isNaN(v)||v<=0?null:v; }
     return parseFloat(sel.value);
   }
-  function getVehicleLabel() {
-    const sel=document.getElementById('vehicle-select');
-    if (sel.value==='custom') return 'Custom Vehicle';
-    const opt=sel.options[sel.selectedIndex];
-    return opt.getAttribute('data-label')||opt.text.split('—')[0].trim();
-  }
   function getFuelPrice() { const v=parseFloat(document.getElementById('fuel-price').value);return isNaN(v)||v<=0?71:v; }
   function onInputChange() { if (cachedRoutes.length>0) renderRouteCards(cachedRoutes); }
 
-  /* Formatting */
   function fmtDur(s) { const h=Math.floor(s/3600),m=Math.round((s%3600)/60);return h>0?`${h}h ${m}m`:`${m}m`; }
 
-  /* UI State Machine */
   function showState(st) {
     document.getElementById('results-empty').style.display   = st==='empty'   ? 'block':'none';
     document.getElementById('results-loading').style.display = st==='loading' ? 'flex' :'none';
@@ -1352,7 +1379,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (msg) document.getElementById('loading-msg').textContent=msg;
   }
 
-  /* Route cards */
   function renderRouteCards(routes) {
     const eff=getEfficiency(),price=getFuelPrice();
     if (!eff) return;
@@ -1403,7 +1429,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showState('results');
   }
 
-  /* Main trigger */
   async function resetAndCalculate() {
     if (!originLatLng||!targetLatLng) return;
     cachedRoutes=[];activeRouteIdx=0;clearPolylines();showState('loading');
@@ -1427,19 +1452,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 /* ═══════════════════════════════════════════════════════════════════
- * FUEL NEWS FEED — Anthropic API w/ web search
- * ═══════════════════════════════════════════════════════════════════ */
-
-/* ═══════════════════════════════════════════════════════════════════
  * FUEL NEWS FEED — RSS from PH news sites via allorigins CORS proxy
  * ═══════════════════════════════════════════════════════════════════ */
 
 const NEWS_CACHE_KEY = 'fuelroute_ph_news_v2';
-const NEWS_CACHE_TTL = 60 * 60 * 1000; // 1 hour
+const NEWS_CACHE_TTL = 60 * 60 * 1000;
 let newsPanelOpen = false;
 let newsFetchInProgress = false;
 
-// PH news RSS feeds — fuel/energy sections or search feeds
 const RSS_FEEDS = [
   { url: 'https://www.philstar.com/rss/business',          source: 'Philippine Star' },
   { url: 'https://business.inquirer.net/feed',             source: 'Inquirer Business' },
@@ -1448,7 +1468,6 @@ const RSS_FEEDS = [
   { url: 'https://rappler.com/business/economy/feed/',     source: 'Rappler' },
 ];
 
-// Keywords that indicate a fuel-related article
 const FUEL_KEYWORDS = [
   'fuel', 'gasoline', 'diesel', 'petrol', 'petroleum', 'oil price',
   'pump price', 'price hike', 'price rollback', 'doe ', 'energy ',
@@ -1457,7 +1476,6 @@ const FUEL_KEYWORDS = [
   'price increase', 'price cut', 'price reduction', 'price adjustment',
 ];
 
-// Tag an article based on its title/description
 function tagArticle(text) {
   const t = text.toLowerCase();
   if (/rollback|cut|decrease|decreas|reduction|lower|reduc|down|drop|cheaper/.test(t)) return 'drop';
@@ -1496,7 +1514,6 @@ function setNewsDot(state) {
   else if (state === 'error') dot.classList.add('error');
 }
 
-// Fetch one RSS feed via allorigins CORS proxy, return parsed items
 async function fetchOneFeed(feed) {
   const proxyUrl = 'https://api.allorigins.win/get?url=' + encodeURIComponent(feed.url);
   const resp = await fetch(proxyUrl, { signal: AbortSignal.timeout(8000) });
@@ -1512,17 +1529,13 @@ async function fetchOneFeed(feed) {
     const pubDate = el.querySelector('pubDate')?.textContent?.trim() || '';
     if (!title) return;
     if (!isFuelRelated(title, desc)) return;
-    // Format date
     let dateLabel = '';
     try {
       const d = new Date(pubDate);
       if (!isNaN(d)) dateLabel = d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
     } catch {}
     items.push({
-      title,
-      url: link,
-      source: feed.source,
-      date: dateLabel,
+      title, url: link, source: feed.source, date: dateLabel,
       pubDate: pubDate ? new Date(pubDate).getTime() : 0,
       tag: tagArticle(title + ' ' + desc),
     });
@@ -1551,13 +1564,10 @@ async function fetchFuelNews(force) {
   document.getElementById('news-refresh-btn').disabled = true;
 
   try {
-    // Fetch all feeds concurrently; ignore individual failures
     const results = await Promise.allSettled(RSS_FEEDS.map(f => fetchOneFeed(f)));
-
     let allItems = [];
     results.forEach(r => { if (r.status === 'fulfilled') allItems = allItems.concat(r.value); });
 
-    // Deduplicate by title similarity, sort newest first
     const seen = new Set();
     allItems = allItems.filter(item => {
       const key = item.title.toLowerCase().replace(/\s+/g, ' ').substring(0, 60);
@@ -1566,8 +1576,6 @@ async function fetchFuelNews(force) {
       return true;
     });
     allItems.sort((a, b) => (b.pubDate || 0) - (a.pubDate || 0));
-
-    // Keep top 10
     allItems = allItems.slice(0, 10);
 
     if (allItems.length === 0) throw new Error('No fuel articles found in any feed');
@@ -1635,7 +1643,6 @@ function renderNewsItems(items, ts) {
 function escNewsHtml(s) {
   return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
-
 </script>
 </body>
 </html>
